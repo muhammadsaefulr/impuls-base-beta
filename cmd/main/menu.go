@@ -31,7 +31,7 @@ func (t tagSlice) Swap(i int, j int) {
 
 func menu(client *x.Nc, m *x.IMsg) {
 	var str string
-	str += fmt.Sprintf("Halo, %s 👋\nBot ini masih dalam tahap beta\n\n»» Host: Localhost\n»» Language: GoLang\n»» Library: waSocket\n\n", m.PushName)
+	str += fmt.Sprintf("Halo, @%s 👋\nBot ini masih dalam tahap beta\n\n»» Host: Localhost\n»» Language: GoLang\n»» Library: waSocket\n\n", m.Sender)
 	var tags map[string][]item
 	for _, list := range x.GetList() {
 		if tags == nil {

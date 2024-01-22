@@ -461,6 +461,19 @@ func (client *Nc) FetchGroupAdmin(Jid types.JID) ([]string, error) {
 	return Admin, err
 }
 
+func (client *Nc) getGroupMembers(jid types.JID) ([]string, error) {
+	var Members []string
+	resp, err := client.WA.GetGroupInfo(jid)
+	if err != nil {
+		return Members, err
+	} else {
+		for _, group := range resp.Participants {
+			Members = append(Members, group.JID.String())
+		}
+	}
+	return Members, err
+}
+
 func (client *Nc) SendSticker(jid types.JID, data []byte, opts *waProto.ContextInfo) {
 	uploaded, err := client.WA.Upload(context.Background(), data, waSocket.MediaImage)
 	if err != nil {

@@ -8,12 +8,11 @@ import (
 
 func init() {
 	x.NewCmd(&x.ICmd{
-		Name:    "ping",
-		Cmd:     []string{"ping"},
-		Tags:    "owner",
-		Desc:    "Test Ping To Host",
-		Prefix:  true,
-		IsOwner: true,
+		Name:   "ping",
+		Cmd:    []string{"ping"},
+		Tags:   "owner",
+		Desc:   "Test Ping To Host",
+		Prefix: true,
 		Exec: func(sock *x.Nc, m *x.IMsg) {
 			m.React("⏱️")
 
