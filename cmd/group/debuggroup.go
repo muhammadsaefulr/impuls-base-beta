@@ -16,9 +16,9 @@ func init() {
 		Prefix: true,
 		Exec: func(sock *x.Nc, m *x.IMsg) {
 			m.React("⏱️")
-			// sock.FetchGroupAdmin()
 
-			var participantNames []string
+			var participantNumber []string
+			var participantServer []string
 
 			resp, err := sock.WA.GetGroupInfo(m.From)
 
@@ -27,13 +27,26 @@ func init() {
 			}
 
 			for _, participant := range resp.Participants {
-				participantNames = append(participantNames, participant.JID.User)
+				participantNumber = append(participantNumber, participant.JID.User)
+				participantServer = append(participantServer, participant.JID.Server)
 			}
 
-			participantStr := fmt.Sprintf("Participants:\n%s", strings.Join(participantNames, "\n"))
+			// var userParticipant = strings.Join(participantNumber, "\n")
+			var participantStr strings.Builder
+			var userParticipant strings.Builder
 
-			sock.SendText(m.From, participantStr, &waProto.ContextInfo{
-				MentionedJid: participantNames,
+			for i := 0; i < len(participantNumber); i++ {
+				participantStr.WriteString(participantNumber[i] + "@" + participantServer[i] + "\n")
+			}
+
+			for i := 0; i < len(participantNumber); i++ {
+				userParticipant.WriteString("@" + participantNumber[i] + "\n")
+			}
+
+			m.Reply(participantStr.String())
+
+			sock.SendText(m.From, userParticipant.String(), &waProto.ContextInfo{
+				MentionedJid: []string{participantStr.String()},
 			})
 
 		},

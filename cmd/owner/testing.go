@@ -8,17 +8,16 @@ import (
 
 func init() {
 	x.NewCmd(&x.ICmd{
-		Name:    "testing",
-		Cmd:     []string{"testing"},
+		Name:    "exif",
+		Cmd:     []string{"exif"},
 		Tags:    "owner",
-		Desc:    "Testing Reply And UnitTest",
-		Prefix:  false,
+		Prefix:  true,
 		IsOwner: true,
 		Exec: func(sock *x.Nc, m *x.IMsg) {
 			m.React("⏱️")
 
 			conwp := "./tmp/" + m.ID + ".webp"
-			x.CreateExif("mywabot.exif", "🤖 TEST WA BOT 2023 🤖\n\nLibrary: WASOCKET\n\n Language: GoLang \n\n", "")
+			x.CreateExif("mywabot.exif", "Impuls - Simple Whatsapp Bot", "")
 
 			createExif := fmt.Sprintf("webpmux -set exif %s %s -o %s", "tmp/exif/mywabot.exif", conwp, conwp)
 			cmd := exec.Command("bash", "-c", createExif)
@@ -27,7 +26,7 @@ func init() {
 				fmt.Println("Failed to set webp metadata", err)
 			}
 
-			m.Reply("Ini Reply data")
+			m.Reply("Berhasil Mengubah Exif")
 		},
 	})
 }

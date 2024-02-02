@@ -57,6 +57,7 @@ func (client *Nc) SendWithNewsLestter(from types.JID, text string, newjid string
 			ContentType:       waProto.ForwardedNewsletterMessageInfo_UPDATE.Enum(),
 			AccessibilityText: proto.String(""),
 		},
+		GroupMentions: opts.GroupMentions,
 		IsForwarded:   proto.Bool(true),
 		StanzaId:      opts.StanzaId,
 		Participant:   opts.Participant,

@@ -75,6 +75,13 @@ func GetResult(url string, result interface{}) error {
 	return nil
 }
 
+// func GetResultForm(url string, result interface{}) error {
+
+// 	formData :=
+
+// 	resp, err := http.Post()
+// }
+
 /* image to webp */
 func ImgToWebp(RawPath string, ConvertedPath string) error {
 	exc := exec.Command("ffmpeg",

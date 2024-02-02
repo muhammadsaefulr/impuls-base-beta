@@ -9,7 +9,7 @@ import (
 func init() {
 	x.NewCmd(&x.ICmd{
 		Name:    "gopay",
-		Cmd:     []string{"gpt"},
+		Cmd:     []string{"gopay"},
 		Tags:    "tools",
 		IsQuery: true,
 		Prefix:  true,

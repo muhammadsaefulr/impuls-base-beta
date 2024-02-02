@@ -19,7 +19,7 @@ func init() {
 			var res struct {
 				Result string `json:"result"`
 			}
-			err := x.GetResult("https://skizo.tech/api/openai?apikey=zpfnzf10zkrpvb&text="+url.QueryEscape(m.Query), &res)
+			err := x.GetResult("https://skizo.tech/api/openai?apikey=zpfnzf10zkrpvb&text=indonesia|"+url.QueryEscape(m.Query), &res)
 			if err != nil {
 				m.Reply(fmt.Sprint(err))
 				return

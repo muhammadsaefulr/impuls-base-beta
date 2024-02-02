@@ -31,7 +31,8 @@ func (t tagSlice) Swap(i int, j int) {
 
 func menu(client *x.Nc, m *x.IMsg) {
 	var str string
-	str += fmt.Sprintf("Halo, @%s 👋\nBot ini masih dalam tahap beta\n\n»» Host: Localhost\n»» Language: GoLang\n»» Library: waSocket\n\n", m.Sender)
+	dataSender := m.Sender.User
+	str += fmt.Sprintf("Halo, @%s 👋\nBot ini masih dalam tahap beta\n\n»» Host: Localhost\n»» Language: GoLang\n»» Library: waSocket\n\n", dataSender)
 	var tags map[string][]item
 	for _, list := range x.GetList() {
 		if tags == nil {
@@ -68,6 +69,7 @@ func menu(client *x.Nc, m *x.IMsg) {
 	txt := str + "\n© Developed by Msaepul"
 	var isMessageProtobuf = waProto.ContextInfo_ExternalAdReplyInfo_IMAGE
 	client.SendText(m.From, strings.TrimSpace(txt), &waProto.ContextInfo{
+		MentionedJid: []string{m.Sender.User + "@" + m.Sender.Server},
 		ExternalAdReply: &waProto.ContextInfo_ExternalAdReplyInfo{
 			Title:                 proto.String("Impuls Bot || Beta Test"),
 			Body:                  proto.String("Simple Whatsapp Bot"),
